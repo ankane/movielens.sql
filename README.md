@@ -8,8 +8,10 @@ For easy importing to PostgreSQL, MySQL, SQLite, and others
 
 Create a new database and run [movielens.sql](https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql)
 
+#### PostgreSQL
+
 ```sh
-createdb movielens # PostgreSQL
+createdb movielens
 curl https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql | psql -d movielens
 ```
 
