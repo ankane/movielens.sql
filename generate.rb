@@ -30,7 +30,7 @@ CSV.foreach "#{path}/u.item", col_sep: "|", encoding: "windows-1251:utf-8" do |r
   release_date = row[2] ? Date.parse(row[2]) : nil
   movies << {id: row[0].to_i, title: row[1], release_date: release_date}
   movie_genres = []
-  row[6..-3].each_with_index do |v, i|
+  row[6..-1].each_with_index do |v, i|
     if v == "1"
       genres_movies << {id: genres_movies.size + 1, movie_id: row[0].to_i, genre_id: genres[i][:id]}
     end
