@@ -15,6 +15,8 @@ curl https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql
 
 ## How to Generate
 
+[Download](http://grouplens.org/datasets/movielens/) a MovieLens data set and run
+
 ```ruby
 ruby generate.rb path/to/ml-100k > movielens.sql
 ```
