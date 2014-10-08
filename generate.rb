@@ -4,14 +4,14 @@ path = ARGV[0]
 
 occupations = []
 CSV.foreach "#{path}/u.occupation", col_sep: "|" do |row|
-  occupations << {id: occupations.size + 1, name: row[0]}
+  occupations << {id: occupations.size + 1, name: row[0].capitalize}
 end
 
 occupation_ids_by_name = Hash[ occupations.map{|o| [o[:name], o[:id]] } ]
 
 users = []
 CSV.foreach "#{path}/u.user", col_sep: "|" do |row|
-  users << {id: row[0].to_i, age: row[1].to_i, gender: row[2], occupation_id: occupation_ids_by_name[row[3]], zip_code: row[4]}
+  users << {id: row[0].to_i, age: row[1].to_i, gender: row[2], occupation_id: occupation_ids_by_name[row[3].capitalize], zip_code: row[4]}
 end
 
 ratings = []
@@ -21,7 +21,7 @@ end
 
 genres = []
 CSV.foreach "#{path}/u.genre", col_sep: "|" do |row|
-  genres << {id: genres.size + 1, name: row[0]} if row[0]
+  genres << {id: genres.size + 1, name: row[0]} if row[0] && row[0] != "unknown"
 end
 
 movies = []
@@ -30,7 +30,7 @@ CSV.foreach "#{path}/u.item", col_sep: "|", encoding: "windows-1251:utf-8" do |r
   release_date = row[2] ? Date.parse(row[2]) : nil
   movies << {id: row[0].to_i, title: row[1], release_date: release_date}
   movie_genres = []
-  row[5..-2].each_with_index do |v, i|
+  row[6..-3].each_with_index do |v, i|
     if v == "1"
       genres_movies << {id: genres_movies.size + 1, movie_id: row[0].to_i, genre_id: genres[i][:id]}
     end
