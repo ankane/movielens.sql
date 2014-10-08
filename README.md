@@ -6,7 +6,7 @@ For easy importing to PostgreSQL, MySQL, SQLite, and others
 
 ## How to Use
 
-Create a new database to store the data and run [movielens.sql](https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql)
+Create a new database and run [movielens.sql](https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql)
 
 ## How to Generate
 
