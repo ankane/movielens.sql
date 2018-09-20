@@ -15,6 +15,19 @@ createdb movielens
 curl https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql | psql -d movielens
 ```
 
+#### MySQL
+
+```sh
+mysql -e 'create database movielens;'
+curl https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql | mysql -u root movielens
+```
+
+#### SQLite
+
+```sh
+curl https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql | sqlite3 movielens.sqlite3
+```
+
 ## How to Generate
 
 [Download](http://grouplens.org/datasets/movielens/) a MovieLens data set and run
