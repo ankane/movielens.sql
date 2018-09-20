@@ -11,21 +11,24 @@ Create a new database and run [movielens.sql](https://raw.githubusercontent.com/
 #### PostgreSQL
 
 ```sh
+wget https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql
 createdb movielens
-curl https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql | psql -d movielens
+psql -d movielens < movielens.sql
 ```
 
 #### MySQL
 
 ```sh
+wget https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql
 mysql -e 'create database movielens;'
-curl https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql | mysql -u root movielens
+mysql -u root movielens < movielens.sql
 ```
 
 #### SQLite
 
 ```sh
-curl https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql | sqlite3 movielens.sqlite3
+wget https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql
+sqlite3 movielens.sqlite3 < movielens.sql
 ```
 
 ## How to Generate
