@@ -1,17 +1,29 @@
 # MovieLens.sql
 
-The [MovieLens](http://grouplens.org/datasets/movielens/) database in SQL
+The [MovieLens](https://grouplens.org/datasets/movielens/) database in SQL
 
 For easy importing to PostgreSQL, MySQL, SQLite, and others
 
 ## How to Use
 
-Create a new database and run [movielens.sql](https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql)
+Clone this repo:
+
+```ruby
+git clone https://github.com/ankane/movielens.sql.git
+cd movielens.sql
+```
+
+Download the [MovieLens 100k dataset](https://grouplens.org/datasets/movielens/100k/), unzip, and run:
+
+```ruby
+ruby generate.rb path/to/ml-100k > movielens.sql
+```
+
+Then import it into your database with one of the commands below.
 
 #### PostgreSQL
 
 ```sh
-wget https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql
 createdb movielens
 psql -d movielens < movielens.sql
 ```
@@ -19,22 +31,12 @@ psql -d movielens < movielens.sql
 #### MySQL
 
 ```sh
-wget https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql
-mysql -e 'create database movielens;'
+mysqladmin create movielens
 mysql -u root movielens < movielens.sql
 ```
 
 #### SQLite
 
 ```sh
-wget https://raw.githubusercontent.com/ankane/movielens.sql/master/movielens.sql
 sqlite3 movielens.sqlite3 < movielens.sql
-```
-
-## How to Generate
-
-[Download](http://grouplens.org/datasets/movielens/) a MovieLens data set and run
-
-```ruby
-ruby generate.rb path/to/ml-100k > movielens.sql
 ```
