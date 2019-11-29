@@ -8,14 +8,14 @@ For easy importing to PostgreSQL, MySQL, SQLite, and others
 
 Clone this repo:
 
-```ruby
+```sh
 git clone https://github.com/ankane/movielens.sql.git
 cd movielens.sql
 ```
 
 Download the [MovieLens 100k dataset](https://grouplens.org/datasets/movielens/100k/), unzip, and run:
 
-```ruby
+```sh
 ruby generate.rb path/to/ml-100k > movielens.sql
 ```
 
