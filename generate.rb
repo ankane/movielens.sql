@@ -38,7 +38,7 @@ end
 
 movies = []
 genres_movies = []
-File.foreach "#{path}/u.item", chomp: true, encoding: "windows-1251:utf-8" do |line|
+File.foreach "#{path}/u.item", chomp: true, encoding: "iso-8859-1:utf-8" do |line|
   row = line.split("|")
   release_date = !row[2].empty? ? Date.parse(row[2]) : nil
   movies << {id: row[0].to_i, title: row[1], release_date: release_date}
