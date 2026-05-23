@@ -1,10 +1,10 @@
 require "date"
 
-path = ARGV[0]
-
 if ARGV.size != 1
   abort "USAGE: ruby generate.rb path/to/ml-100k"
 end
+
+path = ARGV[0]
 
 unless Dir.exist?(path)
   abort "Directory does not exist"
@@ -66,10 +66,10 @@ def quoted_value(v)
 end
 
 def values(records)
-  records.map{|r| "(#{r.values.map{|v| quoted_value(v) }.join(",")})" }.join(",")
+  records.map { |r| "(#{r.values.map{ |v| quoted_value(v) }.join(",")})" }.join(",")
 end
 
-puts %Q!
+puts %!
 BEGIN;
 
 DROP TABLE IF EXISTS occupations;
