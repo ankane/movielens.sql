@@ -21,13 +21,25 @@ occupation_ids_by_name = occupations.to_h { |o| [o[:name], o[:id]] }
 users = []
 File.foreach "#{path}/u.user", chomp: true do |line|
   row = line.split("|")
-  users << {id: row[0].to_i, age: row[1].to_i, gender: row[2], occupation_id: occupation_ids_by_name[row[3].capitalize], zip_code: row[4]}
+  users << {
+    id: row[0].to_i,
+    age: row[1].to_i,
+    gender: row[2],
+    occupation_id: occupation_ids_by_name[row[3].capitalize],
+    zip_code: row[4]
+  }
 end
 
 ratings = []
 File.foreach "#{path}/u.data", chomp: true do |line|
   row = line.split("\t")
-  ratings << {id: ratings.size + 1, user_id: row[0].to_i, movie_id: row[1].to_i, rating: row[2].to_i, rated_at: Time.at(row[3].to_i)}
+  ratings << {
+    id: ratings.size + 1,
+    user_id: row[0].to_i,
+    movie_id: row[1].to_i,
+    rating: row[2].to_i,
+    rated_at: Time.at(row[3].to_i)
+  }
 end
 
 genres = []
