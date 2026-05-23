@@ -1,33 +1,46 @@
-require "csv"
+require "date"
 
 path = ARGV[0]
 
+if ARGV.size != 1
+  abort "USAGE: ruby generate.rb path/to/ml-100k"
+end
+
+unless Dir.exist?(path)
+  abort "Directory does not exist"
+end
+
 occupations = []
-CSV.foreach "#{path}/u.occupation", col_sep: "|" do |row|
+File.foreach "#{path}/u.occupation", chomp: true do |line|
+  row = line.split("|")
   occupations << {id: occupations.size + 1, name: row[0].capitalize}
 end
 
-occupation_ids_by_name = Hash[ occupations.map{|o| [o[:name], o[:id]] } ]
+occupation_ids_by_name = occupations.to_h { |o| [o[:name], o[:id]] }
 
 users = []
-CSV.foreach "#{path}/u.user", col_sep: "|" do |row|
+File.foreach "#{path}/u.user", chomp: true do |line|
+  row = line.split("|")
   users << {id: row[0].to_i, age: row[1].to_i, gender: row[2], occupation_id: occupation_ids_by_name[row[3].capitalize], zip_code: row[4]}
 end
 
 ratings = []
-CSV.foreach "#{path}/u.data", col_sep: "\t" do |row|
+File.foreach "#{path}/u.data", chomp: true do |line|
+  row = line.split("\t")
   ratings << {id: ratings.size + 1, user_id: row[0].to_i, movie_id: row[1].to_i, rating: row[2].to_i, rated_at: Time.at(row[3].to_i)}
 end
 
 genres = []
-CSV.foreach "#{path}/u.genre", col_sep: "|" do |row|
+File.foreach "#{path}/u.genre", chomp: true do |line|
+  row = line.split("|")
   genres << {id: genres.size + 1, name: row[0]} if row[0] && row[0] != "unknown"
 end
 
 movies = []
 genres_movies = []
-CSV.foreach "#{path}/u.item", col_sep: "|", encoding: "windows-1251:utf-8" do |row|
-  release_date = row[2] ? Date.parse(row[2]) : nil
+File.foreach "#{path}/u.item", chomp: true, encoding: "windows-1251:utf-8" do |line|
+  row = line.split("|")
+  release_date = !row[2].empty? ? Date.parse(row[2]) : nil
   movies << {id: row[0].to_i, title: row[1], release_date: release_date}
   movie_genres = []
   row[6..-1].each_with_index do |v, i|
