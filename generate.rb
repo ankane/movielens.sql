@@ -69,7 +69,7 @@ def values(records)
   records.map { |r| "(#{r.values.map{ |v| quoted_value(v) }.join(",")})" }.join(",")
 end
 
-puts %!
+puts <<~SQL
 BEGIN;
 
 DROP TABLE IF EXISTS occupations;
@@ -129,4 +129,4 @@ CREATE TABLE genres_movies (
 INSERT INTO genres_movies VALUES #{values(genres_movies)};
 
 COMMIT;
-!.strip
+SQL
