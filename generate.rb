@@ -78,7 +78,7 @@ def quoted_value(v)
 end
 
 def values(records)
-  records.map { |r| "(#{r.values.map{ |v| quoted_value(v) }.join(",")})" }.join(",")
+  records.map { |r| "(#{r.values.map { |v| quoted_value(v) }.join(",")})" }.join(",")
 end
 
 puts <<~SQL
